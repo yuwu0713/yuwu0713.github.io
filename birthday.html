@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 周震南 · 专属生日礼物 🎂</title>
+    <!-- 字体与图标 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b0c1a 0%, #1a1e30 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Quicksand', sans-serif;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 漂浮星星背景 - 完全保留 */
+        .stars, .twinkling {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .stars {
+            background: #000 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48Y2lyY2xlIGN4PSI2IiBjeT0iMTQiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC44KSIvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjYwIiByPSIxLjUiIGZpbGw9IiNmZmZmZmYiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjIwMCIgcj0iMSIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjI4MCIgY3k9IjE4MCIgcj0iMS4yIiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starPulse 4s infinite alternate;
+        }
+        .twinkling {
+            background: transparent url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIyMjAiIGN5PSIxMjAiIHI9IjEuOCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC44Ii8+PC9zdmc+');
+            background-size: 250px 250px;
+            background-repeat: repeat;
+            animation: twinkle 3s infinite;
+        }
+        @keyframes starPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.9; }
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.2; }
+        }
+
+        /* 主卡片 - 完全保留 */
+        .birthday-card {
+            position: relative;
+            width: 100%;
+            max-width: 750px;
+            background: rgba(20, 15, 35, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 48px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7), 0 0 0 2px #ffd96633 inset, 0 0 30px #f7c35c;
+            padding: 30px 25px 40px 25px;
+            z-index: 10;
+            color: #f5e9ff;
+        }
+
+        /* 心跳动画 - 完全保留 */
+        .heartbeat {
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            16% { transform: scale(1.08); }
+            33% { transform: scale(0.98);}
+            50% { transform: scale(1.04);}
+            66% { transform: scale(0.98);}
+            83% { transform: scale(1.03);}
+            100% { transform: scale(1); }
+        }
+
+        /* 弹幕样式 - 完全保留 */
+        .danmu-box {
+            pointer-events:none;
+            position: fixed;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .danmu-message {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffe498;
+            text-shadow: 1px 1px 8px #4a3466,0 2px 5px #1a1531;
+            animation: danmu-move 10s linear;
+            opacity:0.85;
+        }
+        @keyframes danmu-move {
+            0%   { left: 100%; }
+            100% { left: -100%; }
+        }
+
+        /* ===== 音乐唱片 - 右上角悬浮 (完全保留) ===== */
+        .music-disc {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(20, 15, 35, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid #fec260;
+            border-radius: 60px;
+            padding: 10px 20px 10px 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px #fd9e28;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { right: -200px; opacity: 0; }
+            100% { right: 30px; opacity: 1; }
+        }
+
+        .music-disc:hover {
+            transform: scale(1.02);
+            border-color: #ffd966;
+            box-shadow: 0 10px 40px rgba(253, 158, 40, 0.6);
+        }
+
+        .disc-cover {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #fec260;
+            box-shadow: 0 0 20px #ffae6a;
+            animation: rotate 8s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .music-disc.playing .disc-cover {
+            animation-play-state: running;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .disc-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .disc-hole {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #1a0f1f;
+            border: 2px solid #fec260;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .music-info-tip {
+            min-width: 120px;
+        }
+
+        .song-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffeac2;
+            text-shadow: 0 0 8px #f9b93b;
+            white-space: nowrap;
+        }
+
+        .song-artist {
+            font-size: 0.8rem;
+            color: #d4b48c;
+        }
+
+        .music-control {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(145deg, #dba455, #b5762c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffe294;
+            box-shadow: 0 0 20px #fdcc6b;
+            transition: 0.3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145deg, #f3b33d, #d5a55c);
+        }
+
+        .music-control i {
+            color: #1a0f1f;
+            font-size: 1rem;
+        }
+
+        /* 音量控制条 - 完全保留 */
+        .volume-control {
+            position: fixed;
+            top: 110px;
+            right: 30px;
+            z-index: 999;
+            background: rgba(20, 15, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #fec260;
+            border-radius: 40px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .volume-control.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .volume-control i {
+            color: #fec260;
+            font-size: 1.2rem;
+        }
+
+        .volume-control input[type=range] {
+            width: 100px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #fec260, #ffd966);
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .volume-control input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #fff3b0;
+            border: 2px solid #fec260;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px #fd9e28;
+        }
+
+        /* 2. 视频区域 - 完全保留 */
+        .video-section {
+            margin-bottom: 30px;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 3px solid #fec260;
+            box-shadow: 0 0 30px #fd9e28;
+            background: #000;
+        }
+        .video-section video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #1a0f1f;
+        }
+        .video-caption {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 1rem;
+            color: #fad28c;
+            font-weight: 600;
+        }
+        .video-caption i {
+            color: #f9b93b;
+            margin: 0 5px;
+        }
+
+        /* 3. 朋友照片轮播区 - 完全保留 (自适应所有照片尺寸) */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            margin: 50px 0 30px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 3px solid #f3b33d;
+            box-shadow: 0 0 30px #ffae6a;
+            background: #221c33;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #2e1f3a;
+            min-height: 380px;
+            padding: 20px 0;
+        }
+        .slide img {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .slide img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 图片描述样式 - 完全保留 */
+        .photo-caption {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            color: #ffeac2;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 1rem;
+            border: 1px solid #fec260;
+            box-shadow: 0 0 20px rgba(253, 158, 40, 0.5);
+            text-align: center;
+            max-width: 90%;
+            margin-top: 5px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .photo-caption i {
+            color: #f9b93b;
+            margin: 0 5px;
+        }
+
+        .slide-dots {
+            text-align: center;
+            padding: 12px 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #b99150;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+        .dot.active {
+            background: #fbc85a;
+            box-shadow: 0 0 15px #f9b93b;
+            transform: scale(1.2);
+            border-color: #fff3b0;
+        }
+        .slide-arrow {
+            position: absolute;
+            top: 35%;
+            transform: translateY(-50%);
+            background: rgba(20, 15, 35, 0.7);
+            color: #fad28c;
+            border: 2px solid #fec260;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 20;
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+        }
+        .slide-arrow:hover {
+            background: #4a3466;
+            color: #ffeac2;
+            border-color: #fbc85a;
+        }
+        .prev {
+            left: 15px;
+        }
+        .next {
+            right: 15px;
+        }
+
+        /* ===== 新增：生日倒计时 ===== */
+        .countdown-container {
+            background: rgba(46, 24, 64, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid #fec260;
+            border-radius: 60px;
+            padding: 20px 25px;
+            margin: 20px 0 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(253, 158, 40, 0.3);
+        }
+        .countdown-title {
+            color: #ffeac2;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .countdown-title i {
+            color: #f9b93b;
+            margin: 0 8px;
+        }
+        .countdown-number {
+            color: #fec260;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px #fd9e28;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        }
+        .countdown-label {
+            color: #d4b48c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* ===== 新增：精美信纸样式 (替换原来的手写信) ===== */
+        .letter-paper {
+            background: #faf3e8;
+            background-image: linear-gradient(#e5d5b8 1px, transparent 1px);
+            background-size: 100% 32px;
+            border-radius: 30px 30px 30px 5px;
+            padding: 40px 35px 35px;
+            position: relative;
+            box-shadow: 0 10px 0 #b99150, 0 0 40px rgba(255, 175, 75, 0.5);
+            border: 2px solid #d5a55c;
+            margin-top: 30px;
+        }
+        .letter-paper:before {
+            content: "💌";
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #d5a55c;
+            color: #1a0f1f;
+            font-size: 1.5rem;
+            padding: 5px 20px;
+            border-radius: 40px;
+            box-shadow: 0 4px 0 #7a4f27;
+            border: 1px solid #fec260;
+        }
+        .letter-paper:after {
+            content: "";
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            width: 60px;
+            height: 40px;
+            background: rgba(213, 165, 92, 0.2);
+            border-radius: 50%;
+            filter: blur(15px);
+        }
+        .message-paper {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #3a2a1e;
+            font-family: 'ZCOOL KuaiLe', cursive;
+            margin: 0;
+            white-space: pre-wrap;
+            position: relative;
+            z-index: 2;
+        }
+        .message-paper i {
+            color: #d5a55c;
+            margin: 0 5px;
+        }
+        .signature-paper {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: right;
+            color: #b5762c;
+            margin-top: 30px;
+            border-top: 2px dashed #d5a55c;
+            padding-top: 20px;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        }
+
+        /* ===== 新增：生日蛋糕 - 吹蜡烛 ===== */
+        .birthday-cake-container {
+            background: rgba(46, 24, 64, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 60px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #fec260;
+            text-align: center;
+        }
+        .cake-title {
+            color: #ffeac2;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .cake-title i {
+            color: #f9b93b;
+            margin: 0 8px;
+        }
+        .cake-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .cake-emoji {
+            font-size: 4rem;
+            filter: drop-shadow(0 10px 15px rgba(253, 158, 40, 0.5));
+            transition: 0.3s;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .candle-status {
+            font-size: 2rem;
+            letter-spacing: 5px;
+        }
+        .blow-hint {
+            color: #d4b48c;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        .blow-hint i {
+            color: #f9b93b;
+            margin: 0 5px;
+        }
+        .blow-btn {
+            background: linear-gradient(145deg, #dba455, #b5762c);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            color: #1a0f1f;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: 2px solid #ffe294;
+            box-shadow: 0 5px 0 #6b4a20, 0 0 20px #fdcc6b;
+            transition: 0.1s ease;
+            margin-top: 10px;
+        }
+        .blow-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #6b4a20, 0 0 30px #fcc15b;
+        }
+
+        /* ===== 新增：点击特效 ===== */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.8rem;
+            animation: floatUp 1s ease-out forwards;
+            text-shadow: 0 0 10px #fec260;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* 小装饰 - 完全保留 */
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            color: #c5a66b;
+        }
+
+        /* 移动端适配 - 更新新增内容 */
+        @media (max-width: 550px) {
+            .slide {
+                min-height: 300px;
+            }
+            .slide img {
+                max-height: 200px;
+            }
+            .photo-caption {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+                max-width: 95%;
+            }
+            .countdown-number { font-size: 1.5rem; }
+            .letter-paper { padding: 30px 20px; }
+            .message-paper { font-size: 1rem; }
+            .signature-paper { font-size: 1.2rem; }
+            .cake-emoji { font-size: 3rem; }
+            .candle-status { font-size: 1.5rem; }
+            .music-disc {
+                top: 15px;
+                right: 15px;
+                padding: 8px 15px 8px 10px;
+            }
+            .music-info-tip {
+                min-width: 90px;
+            }
+            .song-title {
+                font-size: 0.9rem;
+            }
+            .volume-control {
+                top: 95px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <!-- 音乐唱片 - 右上角悬浮 (完全保留) -->
+    <div class="music-disc" id="musicDisc">
+        <div class="disc-cover">
+            <img src="images/zzn-album.jfif" alt="周震南专辑封面" onerror="this.src='https://via.placeholder.com/80/4a3466/ffd966?text=ZNN'">
+            <div class="disc-hole"></div>
+        </div>
+        <div class="music-info-tip">
+            <div class="song-title">月亮代表我的心</div>
+            <div class="song-artist">周震南 · Live</div>
+        </div>
+        <div class="music-control" id="musicControl">
+            <i class="fas fa-play" id="playPauseIcon"></i>
+        </div>
+        <audio loop id="bgmAudio" preload="auto">
+            <source src="music/zzn-birthday.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- 音量控制条 (完全保留) -->
+    <div class="volume-control" id="volumeControl">
+        <i class="fas fa-volume-up" id="volumeIcon"></i>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.7">
+    </div>
+
+    <!-- 弹幕区 (完全保留) -->
+    <div class="danmu-box" id="danmuBox"></div>
+    
+    <div class="birthday-card">
+        <!-- 视频 (完全保留) -->
+        <div class="video-section">
+            <video controls id="mainVideo">
+        		<source src="video/1a5277deaf1139bd778b6dd4484e5ffe.mp4" type="video/mp4">
+        		您的浏览器不支持 video 标签。
+    		</video>
+            <div class="video-caption">
+                <i class="fas fa-star heartbeat"></i>  生日快乐  <i class="fas fa-star heartbeat"></i>
+            </div>
+        </div>
+        
+        <!-- 轮播照片 - 带描述 (完全保留，只优化了friend7-14的描述) -->
+        <div class="slideshow-container" id="slideshow">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <img src="images/friend1.jpg" alt="朋友照片1">
+                    <div class="photo-caption">
+                        <i class="fas fa-camera">这帅死人的家伙 居然是我的朋友 😁</i>  ✨
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/friend2.jpg" alt="朋友照片2">
+                    <div class="photo-caption">
+                        <i class="fas fa-birthday-cake">第一次去成都（非常非常巨巨巨好看，但素手里那条蛇拿远点）</i>  🎂
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/friend3.jpg" alt="朋友照片3">
+                    <div class="photo-caption">
+                        <i class="fas fa-coffee"></i> 第一次去博物馆的合照 ☕
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/friend4.jpg" alt="朋友照片4">
+                    <div class="photo-caption">
+                        <i class="fas fa-heart"></i> 随手一拍 怎么都这么好看💕
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/friend5.jpg" alt="朋友照片5">
+                    <div class="photo-caption">
+                        <i class="fas fa-music"></i> 第一次去漳州找你，你说画了一个巨淡的妆，但是真的很好看🎵
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend6.jpg" alt="朋友照片6">
+                    <div class="photo-caption">
+                        <i class="fas fa-star"></i> 完全就是萌萌的小兔子来的⭐
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend7.jpg" alt="朋友照片7">
+                    <div class="photo-caption">
+                        <i class="fas fa-plane"></i> 这张真的是神图，诡秘，你怎么全是神图 ✈️
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend8.jpg" alt="朋友照片8">
+                    <div class="photo-caption">
+                        <i class="fas fa-film"></i>非常灵性的痣，就这样勾引我🎬
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend9.jpg" alt="朋友照片9">
+                    <div class="photo-caption">
+                        <i class="fas fa-utensils"></i> cos澜的照片 🍜
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend10.jpg" alt="朋友照片10">
+                    <div class="photo-caption">
+                        <i class="fas fa-crown"></i> 随时一拍，就是神图 👑
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend11.jpg" alt="朋友照片11">
+                    <div class="photo-caption">
+                        <i class="fas fa-heart"></i> 就这样萌死所有人 💕
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend12.jpg" alt="朋友照片12">
+                    <div class="photo-caption">
+                        <i class="fas fa-smile"></i> 第一次你来找我，我们的合照😊
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend13.jpg" alt="朋友照片13">
+                    <div class="photo-caption">
+                        <i class="fas fa-sun"></i> 高中的偷拍☀️
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend14.jpg" alt="朋友照片14">
+                    <div class="photo-caption">
+                        <i></i> 🎂第一次一起过生日🌙
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend15.jpg" alt="朋友照片15">
+                    <div class="photo-caption">
+                        <i></i>🍉 真的很萌！😁
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend16.jpg" alt="朋友照片16">
+                    <div class="photo-caption">
+                        <i></i>✌️偷拍+1，很可爱😍
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend17.jpg" alt="朋友照片17">
+                    <div class="photo-caption">
+                        <i></i>🌶️你第一次去挑染，周震南的蓝色😊
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend18.jpg" alt="朋友照片14">
+                    <div class="photo-caption">
+                        <i></i>📸 这古早的画质，依旧很帅啊☀️
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend19.jpg" alt="朋友照片19">
+                    <div class="photo-caption">
+                        <i></i> ❤️老铁，这也太t了 帅死了😁
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend21.jpg" alt="朋友照片21">
+                    <div class="photo-caption">
+                        <i></i> 🐱真的很像罗小黑里的师姐🐱
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend22.jpg" alt="朋友照片22">
+                    <div class="photo-caption">
+                        <i></i> 🍎小丑女，真的很像，随性一拍🌰
+                    </div>
+                </div>
+				<div class="slide">
+                    <img src="images/friend23.jpg" alt="朋友照片23">
+                    <div class="photo-caption">
+                        <i></i> 💖萌萌的大眼睛 非常cute(*╹▽╹*)
+                    </div>
+                </div>
+            </div>
+            <div class="slide-arrow prev" id="prevSlide">❮</div>
+            <div class="slide-arrow next" id="nextSlide">❯</div>
+            <div class="slide-dots" id="slideDots"></div>
+        </div>
+        
+        <!-- ===== 新增：生日倒计时 ===== -->
+        <div class="countdown-container">
+            <div class="countdown-title">
+                <i class="fas fa-hourglass-half"></i> 距离你的生日还有 <i class="fas fa-hourglass-half"></i>
+            </div>
+            <div class="countdown-number" id="countdownTimer">00天 00时 00分 00秒</div>
+            <div class="countdown-label">期待和你一起庆祝的那一天 ✨</div>
+        </div>
+        
+        <!-- ===== 新增：生日蛋糕 - 吹蜡烛 ===== -->
+        <div class="birthday-cake-container">
+            <div class="cake-title">
+                <i class="fas fa-birthday-cake"></i> 来吹蜡烛许个愿吧 <i class="fas fa-birthday-cake"></i>
+            </div>
+            <div class="cake-wrapper">
+                <div class="cake-emoji" id="cakeEmoji">
+                    🎂🔥🔥🔥
+                </div>
+                <div class="candle-status" id="candleStatus">🕯️🕯️🕯️</div>
+                <div class="blow-hint">
+                    <i class="fas fa-microphone"></i> 点击按钮吹蜡烛 <i class="fas fa-microphone"></i>
+                </div>
+                <button class="blow-btn" id="blowCandleBtn">
+                    <i class="fas fa-wind"></i> 呼～ 吹蜡烛 <i class="fas fa-wind"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- ===== 替换：精美信纸 (原手写信升级) ===== -->
+        <div class="letter-paper">
+            <div class="message-paper">
+                <i class="fas fa-feather-alt"></i>  张卓，祝你生日快乐！🎂🎂🎂<br>
+				在写给你这封信的时候，我在脑海中酝酿着很多话，但不知道如何去下笔，但是有句话，一定一定要说，“有你这个朋友真的很幸运”，幸运能在高三的时候跟你成为同桌，第一次见到你的时候，我就在想这个女孩子怎么这么高冷，居然不想跟我当同桌，但其实你是温暖又热烈的人，你一直说自己敏感，但是我觉得敏感并不是缺陷，是你的天赋，在人生这条路上，会遇到很多人，感谢你的是，你在我这一站下了车，我的性格确实是有点小缺陷，很庆幸你能包容我，跟我成为朋友！愿岁并谢，与友长兮。<br>
+                　　我想祝你自由，平安，勇敢，能放肆大笑，遇到的都是好人，未来的人生都是坦途。<br>
+				人生这条路，本就会有无数个路口，所以大胆走你的路，去你想去的删掉，我就在你旁边的山上，一同攀登，你喊一声，我就能听到（回声 请用物理知识计算一下😄）
+                　　祝我们都能在各自选择的道路上渐入佳境！✨<br><br>
+                <i class="fas fa-candy-cane"></i>  生日快乐，美丽，勇敢的张卓！ 
+            </div>
+            <div class="signature-paper">
+                —— 卢塞彤
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <i class="fas fa-music"></i> 生日快乐🎂<i class="fas fa-music"></i>
+        </div>
+    </div>
+    
+    <!-- JS部分 - 保留原有功能，新增倒计时、吹蜡烛、点击特效 -->
+    <script>
+    (function() {
+        // ===== 轮播图 (完全保留) =====
+        const slides = document.getElementById('slides');
+        const slideItems = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        const dotsContainer = document.getElementById('slideDots');
+        if (slides && slideItems.length) {
+            let currentIndex = 0;
+            const totalSlides = slideItems.length;
+            let autoPlayInterval;
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.dataset.index = i;
+                    dot.addEventListener('click', function() {
+                        goToSlide(parseInt(this.dataset.index));
+                        resetAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                document.querySelectorAll('.dot').forEach((dot, i) => {
+                    if (i === currentIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
+            function nextSlide() { goToSlide(currentIndex + 1);}
+            function prevSlide() { goToSlide(currentIndex - 1);}
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 3000);
+            }
+            prevBtn.addEventListener('click', function() {
+                prevSlide(); resetAutoPlay();
+            });
+            nextBtn.addEventListener('click', function() {
+                nextSlide(); resetAutoPlay();
+            });
+            const container = document.getElementById('slideshow');
+            container.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            container.addEventListener('mouseleave', resetAutoPlay);
+            createDots();
+            resetAutoPlay();
+        }
+
+        // ===== 音乐唱片控制 (完全保留) =====
+        const musicDisc = document.getElementById('musicDisc');
+        const bgmAudio = document.getElementById('bgmAudio');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeIcon = document.getElementById('volumeIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const mainVideo = document.getElementById('mainVideo');
+
+        musicDisc.addEventListener('click', function(e) {
+            if (e.target.closest('.volume-control')) return;
+            
+            if (bgmAudio.paused) {
+                bgmAudio.play();
+                musicDisc.classList.add('playing');
+                playPauseIcon.className = 'fas fa-pause';
+            } else {
+                bgmAudio.pause();
+                musicDisc.classList.remove('playing');
+                playPauseIcon.className = 'fas fa-play';
+            }
+        });
+
+        mainVideo.addEventListener('play', function() {
+            if (!bgmAudio.paused) {
+                bgmAudio.pause();
+                musicDisc.classList.remove('playing');
+                playPauseIcon.className = 'fas fa-play';
+            }
+        });
+
+        volumeIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            volumeControl.classList.toggle('show');
+        });
+
+        volumeSlider.addEventListener('input', function() {
+            bgmAudio.volume = this.value;
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!volumeControl.contains(e.target) && !volumeIcon.contains(e.target)) {
+                volumeControl.classList.remove('show');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tip = document.createElement('div');
+            tip.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 50px;
+                background: rgba(255, 215, 0, 0.9);
+                color: #1a0f1f;
+                padding: 5px 15px;
+                border-radius: 30px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                z-index: 1001;
+                animation: fadeOut 3s forwards;
+                box-shadow: 0 0 20px #fd9e28;
+            `;
+            tip.innerHTML = '🎵 点击唱片播放音乐';
+            document.body.appendChild(tip);
+            
+            setTimeout(() => {
+                tip.style.opacity = '0';
+                setTimeout(() => tip.remove(), 3000);
+            }, 3000);
+        });
+
+        // ===== 弹幕祝福 (完全保留) =====
+        const danmuBox = document.getElementById('danmuBox');
+        const danmuMessages = [
+          '🎂 生日快乐，永远闪闪发光 ✨',
+          '新的一岁要勇敢做自己！💪',
+          '心愿通通实现哟！💕',
+          '被你照亮的每一天都很美好！',
+			'朱颜长似，头上花枝，岁岁年年',
+			'烟火向星辰，所愿皆成真！',
+			'山上不仅有花开，还有你浪漫的21岁。',
+			'改革春风吹满地，新的一岁要争气',
+			'我会在每个有意义的市场远隔山海与你共存'
+        ];
+        function showDanmu(msg, idx) {
+            if (!danmuBox) return;
+            const span = document.createElement('span');
+            span.className = 'danmu-message';
+            span.style.top = (Math.random()*30+2) + '%';
+            span.style.fontSize = (Math.random()*0.6+1.0) + 'rem';
+            span.textContent = msg;
+            danmuBox.appendChild(span);
+            span.addEventListener('animationend', ()=>{danmuBox.removeChild(span)});
+        }
+        let dmIdx=0;
+        setInterval(()=>{ showDanmu(danmuMessages[dmIdx%danmuMessages.length], dmIdx++);}, 3800);
+
+        // ===== 星星彩蛋 (完全保留) =====
+        document.querySelectorAll('.fa-compact-disc,.fa-star').forEach(el=>{
+            el.addEventListener('click',()=>{
+                for(let i=0; i<10; i++){
+                    const star=document.createElement('span');
+                    star.innerHTML = '⭐';
+                    Object.assign(star.style,{
+                        position:'fixed',
+                        left: Math.random()*90+'vw',
+                        top: Math.random()*70+'vh',
+                        fontSize:(Math.random()*2+1)+'rem',
+                        color:'#ffd966',
+                        opacity:0.9,
+                        pointerEvents:'none',
+                        zIndex:800,
+                        transition:'all 2s linear'
+                    });
+                    document.body.appendChild(star);
+                    setTimeout(()=>star.style.opacity='0',1300);
+                    setTimeout(()=>star.remove(),2100);
+                }
+            });
+        });
+
+        // ===== 新增：生日倒计时 =====
+        function updateCountdown() {
+            const now = new Date();
+            // 设置生日为3月1日 (可以根据实际修改)
+            const birthday = new Date(now.getFullYear(), 1, 21);
+            if (now > birthday) {
+                birthday.setFullYear(birthday.getFullYear() + 1);
+            }
+            const diff = birthday - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const timerElement = document.getElementById('countdownTimer');
+            if (timerElement) {
+                timerElement.innerHTML = `${days}天 ${hours}时 ${minutes}分 ${seconds}秒`;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ===== 新增：吹蜡烛 =====
+        const cakeEmoji = document.getElementById('cakeEmoji');
+        const candleStatus = document.getElementById('candleStatus');
+        const blowBtn = document.getElementById('blowCandleBtn');
+        let candlesLit = true;
+
+        function blowOutCandles() {
+            if (candlesLit) {
+                cakeEmoji.innerHTML = '🎂      ';
+                candleStatus.innerHTML = '    ';
+                candlesLit = false;
+                
+                // 吹蜡烛特效：飘出"呼～"
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const puff = document.createElement('div');
+                        puff.className = 'click-effect';
+                        puff.innerHTML = '💨';
+                        puff.style.left = Math.random() * 100 + '%';
+                        puff.style.top = Math.random() * 100 + '%';
+                        document.body.appendChild(puff);
+                        setTimeout(() => puff.remove(), 1000);
+                    }, i * 100);
+                }
+            }
+        }
+
+        blowBtn.addEventListener('click', blowOutCandles);
+        cakeEmoji.addEventListener('dblclick', blowOutCandles); // 双击蛋糕也可以吹蜡烛
+
+        // ===== 新增：点击特效 =====
+        const effects = ['✨', '⭐', '💖', '🎂', '🎵', '🌟', '💫', '🕯️', '🎈'];
+        document.addEventListener('click', function(e) {
+            // 避免在按钮上触发
+            if (e.target.closest('button') || e.target.closest('.music-disc') || e.target.closest('.volume-control')) {
+                return;
+            }
+            
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.innerHTML = effects[Math.floor(Math.random() * effects.length)];
+            effect.style.left = (e.clientX - 20) + 'px';
+            effect.style.top = (e.clientY - 20) + 'px';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+        });
+
+        // 添加淡出动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                70% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    })();
+    </script>
+</body>
+</html>
